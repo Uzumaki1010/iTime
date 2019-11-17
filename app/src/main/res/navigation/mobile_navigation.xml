@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.itime.ui.home.HomeFragment"
+        android:label=""
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_tags"
+        android:name="com.example.itime.ui.gallery.GalleryFragment"
+        android:label=""
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_parts"
+        android:name="com.example.itime.ui.slideshow.SlideshowFragment"
+        android:label=""
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_color"
+        android:name="com.example.itime.ui.tools.ToolsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_tools" />
+
+    <fragment
+        android:id="@+id/nav_prime"
+        android:name="com.example.itime.ui.prime.PrimeFragment"
+        android:label=""
+        tools:layout="@layout/fragment_prime" />
+
+    <fragment
+        android:id="@+id/nav_setting"
+        android:name="com.example.itime.ui.share.ShareFragment"
+        android:label=""
+        tools:layout="@layout/fragment_share" />
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.example.itime.ui.send.SendFragment"
+        android:label=""
+        tools:layout="@layout/fragment_send" />
+
+    <fragment
+        android:id="@+id/nav_help"
+        android:name="com.example.itime.ui.help.HelpFragment"
+        android:label=""
+        tools:layout="@layout/fragment_help" />
+</navigation>

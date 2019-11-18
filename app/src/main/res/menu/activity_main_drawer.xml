@@ -8,10 +8,12 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/icon_home"
             android:title="计时" />
+
         <item
             android:id="@+id/nav_tags"
             android:icon="@drawable/icon_tags"
             android:title="标签" />
+
         <item
             android:id="@+id/nav_parts"
             android:icon="@drawable/icon_parts"

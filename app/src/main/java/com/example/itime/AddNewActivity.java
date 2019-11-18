@@ -35,6 +35,7 @@ public class AddNewActivity extends AppCompatActivity {
     private EditText editTextTitle,editTextNote;
     private TextView textViewData,textViewRepeat,textViewImage,textViewAddTag;
     private String stringRepeat;
+    private String stringImageId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,15 @@ public class AddNewActivity extends AppCompatActivity {
                     }
                 });
                 builder.show();
+            }
+        });
+
+        textViewImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(AddNewActivity.this,SelectImageActivity.class);
+                intent.putExtra("image","");
+                startActivityForResult(intent,903);
             }
         });
     }

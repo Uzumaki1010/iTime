@@ -1,6 +1,7 @@
 package com.example.itime;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.itime.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,6 +34,7 @@ public class AddNewActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButtonBack,floatingActionButtonOK;
     private EditText editTextTitle,editTextNote;
     private TextView textViewData,textViewRepeat,textViewImage,textViewAddTag;
+    private String stringRepeat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,25 @@ public class AddNewActivity extends AppCompatActivity {
                 intent.putExtra("month","1");
                 intent.putExtra("data","1");
                 startActivityForResult(intent,902);
+            }
+        });
+
+        textViewRepeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(AddNewActivity.this);
+                builder.setIcon(R.drawable.icon_repeat);
+                builder.setTitle("重复设置");
+
+                final String[] items={"每年","每月","每日"};
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        stringRepeat=items[which];
+                        Toast.makeText(AddNewActivity.this, "选择" + items[which]+"重复一次", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.show();
             }
         });
     }

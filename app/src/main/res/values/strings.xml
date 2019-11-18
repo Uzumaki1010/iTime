@@ -16,7 +16,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="add_new_menu_data">日期\n长按使用日期计算器</string>
+    <string name="add_new_menu_data">日期</string>
     <string name="add_new_menu_repeat">重复设置</string>
     <string name="add_new_menu_image">图片</string>
     <string name="add_new_menu_addtag">添加标签</string>

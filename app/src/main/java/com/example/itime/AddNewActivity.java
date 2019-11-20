@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ import java.util.List;
 public class AddNewActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_EDIT_DATA = 902;
+    public static final int REQUEST_CODE_EDIT_IMAGE = 903;
     private FloatingActionButton floatingActionButtonBack,floatingActionButtonOK;
     private EditText editTextTitle,editTextNote;
     private TextView textViewData,textViewRepeat,textViewImage,textViewAddTag;
@@ -52,6 +54,12 @@ public class AddNewActivity extends AppCompatActivity {
                     day=data.getStringExtra("day");
                     String ymd=year+"-"+month+"-"+day;
                     textViewData.setText(ymd);
+                }
+                break;
+            case REQUEST_CODE_EDIT_IMAGE:
+                if(resultCode==RESULT_OK){
+                    stringImageId=data.getStringExtra("imageID");
+                    //textViewImage.setText(stringImageId);
                 }
                 break;
         }
@@ -124,9 +132,9 @@ public class AddNewActivity extends AppCompatActivity {
         textViewImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(AddNewActivity.this,SelectImageActivity.class);
-                intent.putExtra("image","");
-                startActivityForResult(intent,903);
+                Intent intent=new Intent(AddNewActivity.this,SelectImageActivity.class);
+                intent.putExtra("imageID","0");
+                startActivityForResult(intent, REQUEST_CODE_EDIT_IMAGE);
             }
         });
 

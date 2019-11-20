@@ -36,9 +36,9 @@ public class EditDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
-                intent.putExtra("year",editTextYear.getText());
-                intent.putExtra("month",editTextMonth.getText());
-                intent.putExtra("data",editTextData.getText());
+                intent.putExtra("year",editTextYear.getText().toString());
+                intent.putExtra("month",editTextMonth.getText().toString());
+                intent.putExtra("day",editTextData.getText().toString());
                 setResult(RESULT_OK,intent);
                 EditDataActivity.this.finish();
             }

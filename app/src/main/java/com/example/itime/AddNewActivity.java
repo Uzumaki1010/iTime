@@ -1,6 +1,7 @@
 package com.example.itime;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -31,13 +32,30 @@ import java.util.List;
 
 public class AddNewActivity extends AppCompatActivity {
 
+    public static final int REQUEST_CODE_EDIT_DATA = 902;
     private FloatingActionButton floatingActionButtonBack,floatingActionButtonOK;
     private EditText editTextTitle,editTextNote;
     private TextView textViewData,textViewRepeat,textViewImage,textViewAddTag;
-
+    private String year,month,day;
     private String stringRepeat;
     private String stringImageId;
     private String stringsAddTag;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode){
+            case REQUEST_CODE_EDIT_DATA:
+                if(resultCode==RESULT_OK){
+                    year=data.getStringExtra("year");
+                    month=data.getStringExtra("month");
+                    day=data.getStringExtra("day");
+                    String ymd=year+"-"+month+"-"+day;
+                    textViewData.setText(ymd);
+                }
+                break;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +93,10 @@ public class AddNewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(AddNewActivity.this,EditDataActivity.class);
-                intent.putExtra("year","1900");
+                intent.putExtra("year","1");
                 intent.putExtra("month","1");
-                intent.putExtra("data","1");
-                startActivityForResult(intent,902);
+                intent.putExtra("day","1");
+                startActivityForResult(intent, REQUEST_CODE_EDIT_DATA);
             }
         });
 

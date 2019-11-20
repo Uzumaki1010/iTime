@@ -34,8 +34,10 @@ public class AddNewActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButtonBack,floatingActionButtonOK;
     private EditText editTextTitle,editTextNote;
     private TextView textViewData,textViewRepeat,textViewImage,textViewAddTag;
+
     private String stringRepeat;
     private String stringImageId;
+    private String stringsAddTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,8 @@ public class AddNewActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         stringRepeat=items[which];
                         Toast.makeText(AddNewActivity.this, "选择" + items[which]+"重复一次", Toast.LENGTH_SHORT).show();
+                        stringRepeat=items[which];
+                        textViewRepeat.setText(stringRepeat);
                     }
                 });
                 builder.show();
@@ -105,6 +109,49 @@ public class AddNewActivity extends AppCompatActivity {
                 Intent intent= new Intent(AddNewActivity.this,SelectImageActivity.class);
                 intent.putExtra("image","");
                 startActivityForResult(intent,903);
+            }
+        });
+
+        textViewAddTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddNewActivity.this);
+                builder.setTitle("添加标签");
+
+                final String items[] = { "生日", "学习", "工作", "节假日" };
+                final boolean[] checkedItems = { true, false, false, false, true };
+                builder.setMultiChoiceItems(items, checkedItems,
+                        new DialogInterface.OnMultiChoiceClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which,
+                                                boolean isChecked) {
+
+                            }
+                        });
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        StringBuffer sb = new StringBuffer();
+                        for (int i = 0; i < items.length; i++) {
+                            // 判断一下 选中的
+                            if (checkedItems[i]) {
+                                String choice = items[i];
+                                sb.append(choice + " ");
+                                stringsAddTag=sb.toString();
+                            }
+                        }
+                        textViewAddTag.setText(stringsAddTag);
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
             }
         });
     }

@@ -35,11 +35,11 @@ public class EditDataActivity extends AppCompatActivity {
         floatingActionButtonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
-                intent.putExtra("year",editTextYear.getText().toString());
-                intent.putExtra("month",editTextMonth.getText().toString());
-                intent.putExtra("day",editTextData.getText().toString());
-                setResult(RESULT_OK,intent);
+                Intent intent1=new Intent();
+                intent1.putExtra("year",editTextYear.getText().toString());
+                intent1.putExtra("month",editTextMonth.getText().toString());
+                intent1.putExtra("day",editTextData.getText().toString());
+                setResult(RESULT_OK,intent1);
                 EditDataActivity.this.finish();
             }
         });

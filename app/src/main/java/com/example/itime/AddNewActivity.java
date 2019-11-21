@@ -38,10 +38,10 @@ public class AddNewActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButtonBack,floatingActionButtonOK;
     private EditText editTextTitle,editTextNote;
     private TextView textViewData,textViewRepeat,textViewImage,textViewAddTag;
-    private String year,month,day;
+    private String stringYear,stringMonth,stringDay;
     private String stringRepeat;
     private String stringImageId;
-    private String stringsAddTag;
+    private String stringTag;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -49,10 +49,10 @@ public class AddNewActivity extends AppCompatActivity {
         switch(requestCode){
             case REQUEST_CODE_EDIT_DATA:
                 if(resultCode==RESULT_OK){
-                    year=data.getStringExtra("year");
-                    month=data.getStringExtra("month");
-                    day=data.getStringExtra("day");
-                    String ymd=year+"-"+month+"-"+day;
+                    stringYear=data.getStringExtra("year");
+                    stringMonth=data.getStringExtra("month");
+                    stringDay=data.getStringExtra("day");
+                    String ymd=stringYear+"-"+stringMonth+"-"+stringDay;
                     textViewData.setText(ymd);
                 }
                 break;
@@ -92,6 +92,12 @@ public class AddNewActivity extends AppCompatActivity {
                 Intent intent=new Intent();
                 intent.putExtra("title",editTextTitle.getText().toString());
                 intent.putExtra("note",editTextNote.getText().toString());
+                intent.putExtra("year",stringYear);
+                intent.putExtra("month",stringMonth);
+                intent.putExtra("day",stringDay);
+                intent.putExtra("repeat",stringRepeat);
+                intent.putExtra("imageId",stringImageId);
+                intent.putExtra("tag",stringTag);
                 setResult(RESULT_OK,intent);
                 AddNewActivity.this.finish();
             }
@@ -100,11 +106,11 @@ public class AddNewActivity extends AppCompatActivity {
         textViewData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(AddNewActivity.this,EditDataActivity.class);
-                intent.putExtra("year","1");
-                intent.putExtra("month","1");
-                intent.putExtra("day","1");
-                startActivityForResult(intent, REQUEST_CODE_EDIT_DATA);
+                Intent intent1= new Intent(AddNewActivity.this,EditDataActivity.class);
+                intent1.putExtra("year","1");
+                intent1.putExtra("month","1");
+                intent1.putExtra("day","1");
+                startActivityForResult(intent1, REQUEST_CODE_EDIT_DATA);
             }
         });
 
@@ -132,9 +138,9 @@ public class AddNewActivity extends AppCompatActivity {
         textViewImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(AddNewActivity.this,SelectImageActivity.class);
-                intent.putExtra("imageID","0");
-                startActivityForResult(intent, REQUEST_CODE_EDIT_IMAGE);
+                Intent intent2=new Intent(AddNewActivity.this,SelectImageActivity.class);
+                intent2.putExtra("imageId","0");
+                startActivityForResult(intent2, REQUEST_CODE_EDIT_IMAGE);
             }
         });
 
@@ -164,10 +170,10 @@ public class AddNewActivity extends AppCompatActivity {
                             if (checkedItems[i]) {
                                 String choice = items[i];
                                 sb.append(choice + " ");
-                                stringsAddTag=sb.toString();
+                                stringTag=sb.toString();
                             }
                         }
-                        textViewAddTag.setText(stringsAddTag);
+                        textViewAddTag.setText(stringTag);
                         dialog.dismiss();
                     }
                 });

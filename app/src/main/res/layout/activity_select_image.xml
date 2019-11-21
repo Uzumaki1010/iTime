@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/activity_bar_new"
+        layout="@layout/activity_new_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

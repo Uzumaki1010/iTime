@@ -53,9 +53,9 @@ public class SelectImageActivity extends AppCompatActivity {
         floatingActionButtonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
-                intent.putExtra("imageID",selectImageId);
-                setResult(RESULT_OK,intent);
+                Intent intent2=new Intent();
+                intent2.putExtra("imageId",selectImageId);
+                setResult(RESULT_OK,intent2);
                 SelectImageActivity.this.finish();
             }
         });
@@ -63,28 +63,28 @@ public class SelectImageActivity extends AppCompatActivity {
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImageId="1";
+                selectImageId="image1";
                 Toast.makeText(SelectImageActivity.this, "你选择了这张图片" , Toast.LENGTH_SHORT).show();
             }
         });
         imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImageId="2";
+                selectImageId="image2";
                 Toast.makeText(SelectImageActivity.this, "你选择了这张图片" , Toast.LENGTH_SHORT).show();
             }
         });
         imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImageId="3";
+                selectImageId="image3";
                 Toast.makeText(SelectImageActivity.this, "你选择了这张图片" , Toast.LENGTH_SHORT).show();
             }
         });
         imageView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImageId="4";
+                selectImageId="image4";
                 Toast.makeText(SelectImageActivity.this, "你选择了这张图片" , Toast.LENGTH_SHORT).show();
             }
         });

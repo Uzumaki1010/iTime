@@ -3,6 +3,7 @@ package com.example.itime;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.itime.ui.home.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -21,10 +22,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.ImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int REQUEST_CODE_ADD_NEW = 901;
     private AppBarConfiguration mAppBarConfiguration;
+    private List<CountDownItem> listCountDownItem=new ArrayList<>();
+    CountDownItemAdapter countDownItemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +42,23 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab_add_new);
 
+        listCountDownItem.add(new CountDownItem("birthday","happy birthday","每年","birthday",1999,10,2,R.drawable.image1));
+        countDownItemAdapter=new CountDownItemAdapter(MainActivity.this,R.layout.list_count_down_item,listCountDownItem);
+        //new HomeFragment(countDownItemAdapter);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(MainActivity.this,AddNewActivity.class);
                 intent.putExtra("title","无");
                 intent.putExtra("note","无");
-                startActivityForResult(intent,901);
+                intent.putExtra("year","1900");
+                intent.putExtra("month","1");
+                intent.putExtra("day","1");
+                intent.putExtra("repeat","无");
+                intent.putExtra("imageId","0");
+                intent.putExtra("tag","无");
+                startActivityForResult(intent, REQUEST_CODE_ADD_NEW);
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });

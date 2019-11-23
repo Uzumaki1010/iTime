@@ -26,9 +26,10 @@ public class CountDownItemAdapter extends ArrayAdapter<CountDownItem> {
     public View getView(int position, View convertView, ViewGroup parent) {
         CountDownItem countDownItem = getItem(position);//获取当前项的实例
         View view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
-        ((ImageView) view.findViewById(R.id.image_view_background)).setImageResource(countDownItem.getImageId());
-        ((TextView) view.findViewById(R.id.text_view_cdi_title)).setText(countDownItem.getTitle()+'\n'+countDownItem.getYear()+1+"年"
-                +countDownItem.getMonth()+"月"+countDownItem.getDay()+"日"+'\n'+countDownItem.getNote());
+        ((ImageView) view.findViewById(R.id.image_view_cdi_background)).setImageResource(countDownItem.getImageId());
+        ((TextView) view.findViewById(R.id.text_view_cdi_title)).setText(countDownItem.getTitle());
+        ((TextView)view.findViewById(R.id.text_view_cdi_date)).setText(countDownItem.getYear()+"年"+countDownItem.getMonth()+"月"+countDownItem.getDay()+"日");
+        ((TextView)view.findViewById(R.id.text_view_cdi_note)).setText(countDownItem.getNote());
         return view;
     }
 }

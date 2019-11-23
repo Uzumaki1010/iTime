@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -23,7 +22,7 @@ public class EditDataActivity extends AppCompatActivity {
         floatingActionButtonConfirm=(FloatingActionButton)findViewById(R.id.floating_action_button_confirm);
         editTextYear=(EditText)findViewById(R.id.edit_text_year);
         editTextMonth=(EditText)findViewById(R.id.edit_text_month);
-        editTextData=(EditText)findViewById(R.id.edit_text_data);
+        editTextData=(EditText)findViewById(R.id.edit_text_day);
 
         floatingActionButtonCancel.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -58,7 +58,7 @@ public class AddNewActivity extends AppCompatActivity {
                 break;
             case REQUEST_CODE_EDIT_IMAGE:
                 if(resultCode==RESULT_OK){
-                    stringImageId=data.getStringExtra("imageID");
+                    stringImageId=data.getStringExtra("imageId");
                     //textViewImage.setText(stringImageId);
                 }
                 break;

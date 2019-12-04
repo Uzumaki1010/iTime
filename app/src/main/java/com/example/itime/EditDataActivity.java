@@ -13,6 +13,7 @@ public class EditDataActivity extends AppCompatActivity {
 
     private FloatingActionButton floatingActionButtonCancel,floatingActionButtonConfirm;
     private EditText editTextYear,editTextMonth,editTextData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +25,7 @@ public class EditDataActivity extends AppCompatActivity {
         editTextMonth=(EditText)findViewById(R.id.edit_text_month);
         editTextData=(EditText)findViewById(R.id.edit_text_day);
 
+        //返回
         floatingActionButtonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,13 +33,14 @@ public class EditDataActivity extends AppCompatActivity {
             }
         });
 
+        //确认
         floatingActionButtonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent1=new Intent();
-                intent1.putExtra("year",editTextYear.getText().toString());
-                intent1.putExtra("month",editTextMonth.getText().toString());
-                intent1.putExtra("day",editTextData.getText().toString());
+                intent1.putExtra("year",Integer.valueOf(editTextYear.getText().toString()).intValue());
+                intent1.putExtra("month",Integer.valueOf(editTextMonth.getText().toString()).intValue());
+                intent1.putExtra("day",Integer.valueOf(editTextData.getText().toString()).intValue());
                 setResult(RESULT_OK,intent1);
                 EditDataActivity.this.finish();
             }

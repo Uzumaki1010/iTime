@@ -34,32 +34,34 @@ import java.util.List;
 public class AddNewActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_EDIT_DATA = 902;
-    public static final int REQUEST_CODE_EDIT_IMAGE = 903;
+    public static final int REQUEST_CODE_SELECT_IMAGE = 903;
+
     private FloatingActionButton floatingActionButtonBack,floatingActionButtonOK;
     private EditText editTextTitle,editTextNote;
     private TextView textViewData,textViewRepeat,textViewImage,textViewAddTag;
-    private String stringYear,stringMonth,stringDay;
+
     private String stringRepeat;
-    private String stringImageId;
     private String stringTag;
+    private int ImageId;
+    private int Year,Month,Day;
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch(requestCode){
-            case REQUEST_CODE_EDIT_DATA:
+            case REQUEST_CODE_EDIT_DATA:                                    //获取年月日
                 if(resultCode==RESULT_OK){
-                    stringYear=data.getStringExtra("year");
-                    stringMonth=data.getStringExtra("month");
-                    stringDay=data.getStringExtra("day");
-                    String ymd=stringYear+"-"+stringMonth+"-"+stringDay;
-                    textViewData.setText(ymd);
+                    Year=data.getIntExtra("year",0);
+                    Month=data.getIntExtra("month",0);
+                    Day=data.getIntExtra("day",0);
+                    textViewData.setText(Year+"-"+Month+"-"+Day);
                 }
                 break;
-            case REQUEST_CODE_EDIT_IMAGE:
+            case REQUEST_CODE_SELECT_IMAGE:                                 //获取图片的资源ID
                 if(resultCode==RESULT_OK){
-                    stringImageId=data.getStringExtra("imageId");
-                    //textViewImage.setText(stringImageId);
+                    ImageId=data.getIntExtra("imageId",0);
+                    //textViewImage.setText(ImageId);
                 }
                 break;
         }
@@ -79,6 +81,7 @@ public class AddNewActivity extends AppCompatActivity {
         textViewImage=(TextView)findViewById(R.id.text_view_image);
         textViewAddTag=(TextView)findViewById(R.id.text_view_addtag);
 
+        //返回
         floatingActionButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,34 +89,37 @@ public class AddNewActivity extends AppCompatActivity {
             }
         });
 
+        //确认，并返回数据
         floatingActionButtonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
                 intent.putExtra("title",editTextTitle.getText().toString());
                 intent.putExtra("note",editTextNote.getText().toString());
-                intent.putExtra("year",stringYear);
-                intent.putExtra("month",stringMonth);
-                intent.putExtra("day",stringDay);
                 intent.putExtra("repeat",stringRepeat);
-                intent.putExtra("imageId",stringImageId);
                 intent.putExtra("tag",stringTag);
+                intent.putExtra("year",Year);
+                intent.putExtra("month",Month);
+                intent.putExtra("day",Day);
+                intent.putExtra("imageId",ImageId);
                 setResult(RESULT_OK,intent);
                 AddNewActivity.this.finish();
             }
         });
 
+        //选择日期
         textViewData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent1= new Intent(AddNewActivity.this,EditDataActivity.class);
-                intent1.putExtra("year","1");
-                intent1.putExtra("month","1");
-                intent1.putExtra("day","1");
+                intent1.putExtra("year",1);
+                intent1.putExtra("month",1);
+                intent1.putExtra("day",1);
                 startActivityForResult(intent1, REQUEST_CODE_EDIT_DATA);
             }
         });
 
+        //设置重复时间
         textViewRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,15 +141,17 @@ public class AddNewActivity extends AppCompatActivity {
             }
         });
 
+        //选择图片
         textViewImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent2=new Intent(AddNewActivity.this,SelectImageActivity.class);
-                intent2.putExtra("imageId","0");
-                startActivityForResult(intent2, REQUEST_CODE_EDIT_IMAGE);
+                intent2.putExtra("imageId",0);
+                startActivityForResult(intent2, REQUEST_CODE_SELECT_IMAGE);
             }
         });
 
+        //添加标签
         textViewAddTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,7 +162,6 @@ public class AddNewActivity extends AppCompatActivity {
                 final boolean[] checkedItems = { true, false, false, false, true };
                 builder.setMultiChoiceItems(items, checkedItems,
                         new DialogInterface.OnMultiChoiceClickListener() {
-
                             @Override
                             public void onClick(DialogInterface dialog, int which,
                                                 boolean isChecked) {

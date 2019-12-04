@@ -26,15 +26,9 @@ public class HomeFragment extends Fragment {
 
     private CountDownItemAdapter countDownItemAdapter;
     private HomeViewModel homeViewModel;
-    private List<CountDownItem> list=new ArrayList<>();
-    ListView listView;
-
-    /*
-    public HomeFragment(MainActivity.CountDownItemAdapter countDownItemAdapter){
-        this.countDownItemAdapter=countDownItemAdapter;
-    }
-
-     */
+    private ListView listViewCdi;
+    private ImageView iamgeViewBackground;
+    private List<CountDownItem> CdiList=new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -45,19 +39,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        listView=root.findViewById(R.id.list_view_count_down_item);
-        list.add(new CountDownItem("生日","生日快乐","每年","生日",1999,10,2,R.drawable.image1));
-        countDownItemAdapter=new CountDownItemAdapter(getContext(),R.layout.list_count_down_item,list);
-        listView.setAdapter(countDownItemAdapter);
-        /*
-        ListView listViewCdis=root.findViewById(R.id.list_view_count_down_item);
-        listViewCdis.setAdapter(countDownItemAdapter);
-        this.registerForContextMenu(listViewCdis);
+        listViewCdi=root.findViewById(R.id.list_view_count_down_item);
+        iamgeViewBackground=root.findViewById(R.id.image_view_back_ground);
 
-         */
-
-        ImageView imageView=root.findViewById(R.id.image_view_back_ground);
-        imageView.setImageResource(R.drawable.image1);
+        countDownItemAdapter=new CountDownItemAdapter(getContext(),R.layout.list_count_down_item,CdiList);
+        listViewCdi.setAdapter(countDownItemAdapter);
         return root;
     }
 }

@@ -3,11 +3,13 @@ package com.example.itime;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.itime.ui.home.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private String title,note,repeat,tag;
     private int year,month,day,imageId;
     private List<CountDownItem> CdiList=new ArrayList<>();
+    Fragment homeFragment;
+    //private CountDownItemAdapter countDownItemAdapter;
 
     //新建事件的返回结果
     @Override
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     month=data.getIntExtra("month",0);
                     day=data.getIntExtra("day",0);
                     imageId=data.getIntExtra("imageId",0);
+
                     getCdiList().add(new CountDownItem(title,note,repeat,tag,year,month,day,imageId));
                 }
                 break;

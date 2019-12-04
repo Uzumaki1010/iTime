@@ -42,8 +42,10 @@ public class HomeFragment extends Fragment {
         listViewCdi=root.findViewById(R.id.list_view_count_down_item);
         iamgeViewBackground=root.findViewById(R.id.image_view_back_ground);
 
+        CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",1999,10,2,R.drawable.image1));
         countDownItemAdapter=new CountDownItemAdapter(getContext(),R.layout.list_count_down_item,CdiList);
         listViewCdi.setAdapter(countDownItemAdapter);
+        iamgeViewBackground.setImageResource(CdiList.get(0).getImageId());
         return root;
     }
 }

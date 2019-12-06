@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private String title,note,repeat,tag;
     private int year,month,day,imageId;
     private List<CountDownItem> CdiList=new ArrayList<>();
-    Fragment homeFragment;
-    //private CountDownItemAdapter countDownItemAdapter;
 
     //新建事件的返回结果
     @Override
@@ -66,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",1999,10,2,R.drawable.image1));
+        CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",1991,10,7,R.drawable.image2));
         //主界面加号的点击事件
         FloatingActionButton fab = findViewById(R.id.fab_add_new);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -127,13 +127,15 @@ public class AddNewActivity extends AppCompatActivity {
                 builder.setIcon(R.drawable.icon_repeat);
                 builder.setTitle("重复设置");
 
-                final String[] items={"每年","每月","每日"};
+                final String[] items={"每年","每月","每周","无"};
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         stringRepeat=items[which];
-                        Toast.makeText(AddNewActivity.this, "选择" + items[which]+"重复一次", Toast.LENGTH_SHORT).show();
-                        stringRepeat=items[which];
+                        if(stringRepeat.equals("无"))
+                            Toast.makeText(AddNewActivity.this, "选择不重复" , Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(AddNewActivity.this, "选择" + items[which]+"重复一次", Toast.LENGTH_SHORT).show();
                         textViewRepeat.setText(stringRepeat);
                     }
                 });

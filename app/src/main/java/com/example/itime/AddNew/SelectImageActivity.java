@@ -1,4 +1,4 @@
-package com.example.itime;
+package com.example.itime.AddNew;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.itime.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SelectImageActivity extends AppCompatActivity {

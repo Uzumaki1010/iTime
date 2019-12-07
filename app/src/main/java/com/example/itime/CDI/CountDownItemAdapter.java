@@ -1,4 +1,4 @@
-package com.example.itime;
+package com.example.itime.CDI;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import java.util.Calendar;
+import com.example.itime.R;
+
 import java.util.List;
 
 public class CountDownItemAdapter extends ArrayAdapter<CountDownItem> {

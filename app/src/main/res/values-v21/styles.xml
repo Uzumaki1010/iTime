@@ -5,4 +5,61 @@
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="AppTheme01">
+        <item name="colorPrimary">@color/colorTheme1</item>   <!--导航栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>  <!--状态栏颜色-->
+        <item name="colorAccent">@color/colorTheme11</item>  <!--控件主题颜色-->
+        <item name="android:navigationBarColor">@color/colorTheme1</item>
+    </style>
+
+    <style name="AppTheme02">
+        <item name="colorPrimary">@color/colorTheme2</item>   <!--导航栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>  <!--状态栏颜色-->
+        <item name="colorAccent">@color/colorTheme22</item>  <!--控件主题颜色-->
+        <item name="android:navigationBarColor">@color/colorTheme2</item>
+    </style>
+
+
+    <style name="AppTheme03">
+        <item name="colorPrimary">@color/colorTheme3</item>   <!--导航栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>  <!--状态栏颜色-->
+        <item name="colorAccent">@color/colorTheme33</item>  <!--控件主题颜色-->
+        <item name="android:navigationBarColor">@color/colorTheme3</item>
+    </style>
+
+    <style name="AppTheme04">
+        <item name="colorPrimary">@color/colorTheme4</item>   <!--导航栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>  <!--状态栏颜色-->
+        <item name="colorAccent">@color/colorTheme44</item>  <!--控件主题颜色-->
+        <item name="android:navigationBarColor">@color/colorTheme4</item>
+    </style>
+
+    <style name="AppTheme05">
+        <item name="colorPrimary">@color/colorTheme5</item>   <!--导航栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>  <!--状态栏颜色-->
+        <item name="colorAccent">@color/colorTheme55</item>  <!--控件主题颜色-->
+        <item name="android:navigationBarColor">@color/colorTheme5</item>
+    </style>
+
+    <style name="AppTheme06">
+        <item name="colorPrimary">@color/colorTheme6</item>   <!--导航栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>  <!--状态栏颜色-->
+        <item name="colorAccent">@color/colorTheme6</item>  <!--控件主题颜色-->
+        <item name="android:navigationBarColor">@color/colorTheme6</item>
+    </style>
+
+    <style name="AppTheme07">
+        <item name="colorPrimary">@color/colorTheme7</item>   <!--导航栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>  <!--状态栏颜色-->
+        <item name="colorAccent">@color/colorTheme7</item>  <!--控件主题颜色-->
+        <item name="android:navigationBarColor">@color/colorTheme7</item>
+    </style>
+
+    <style name="AppTheme08">
+        <item name="colorPrimary">@color/colorTheme8</item>   <!--导航栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>  <!--状态栏颜色-->
+        <item name="colorAccent">@color/colorTheme8</item>  <!--控件主题颜色-->
+        <item name="android:navigationBarColor">@color/colorTheme8</item>
+    </style>
 </resources>

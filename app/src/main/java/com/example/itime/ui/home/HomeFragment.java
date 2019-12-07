@@ -1,6 +1,8 @@
 package com.example.itime.ui.home;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.itime.CountDownItem;
-import com.example.itime.CountDownItemAdapter;
+import com.example.itime.CDI.CountDownItem;
+import com.example.itime.CDI.CountDownItemAdapter;
 import com.example.itime.CountDownItemDetailActivity;
+import com.example.itime.DB.CdiDb;
+import com.example.itime.MainActivity;
 import com.example.itime.R;
 
 import java.util.ArrayList;
@@ -26,11 +30,29 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     public static final int REQUEST_CODE_COUNT_DOWN_ITEM_DETAIL = 904;
+
     private CountDownItemAdapter countDownItemAdapter;
     private HomeViewModel homeViewModel;
     private ListView listViewCdi;
     private ImageView iamgeViewBackground;
-    private List<CountDownItem> CdiList=new ArrayList<>();
+    private ArrayList<CountDownItem> CdiList=new ArrayList<>();
+    private MainActivity mainActivity;
+    private SQLiteDatabase db;
+    //private String title,note,repeat,tag;
+    //private int year,month,day,imageId;
+
+    private void init(){
+        Cursor cursor=new CdiDb().getCursor();
+        if(cursor.moveToFirst()){
+            do{
+                CdiList.add(new CountDownItem(cursor.getString(cursor.getColumnIndex("title")),
+                        cursor.getString(cursor.getColumnIndex("note")),cursor.getString(cursor.getColumnIndex("repeat")),
+                        cursor.getString(cursor.getColumnIndex("tag")),cursor.getInt(cursor.getColumnIndex("year")),
+                        cursor.getInt(cursor.getColumnIndex("month")),cursor.getInt(cursor.getColumnIndex("day")),
+                        cursor.getInt(cursor.getColumnIndex("imageId"))));
+            }while(cursor.moveToNext());
+        }
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -44,11 +66,15 @@ public class HomeFragment extends Fragment {
         listViewCdi=root.findViewById(R.id.list_view_count_down_item);
         iamgeViewBackground=root.findViewById(R.id.image_view_back_ground);
 
-        CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",1999,10,2,R.drawable.image1));
-        CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",1991,10,7,R.drawable.image2));
+        //init();
+        //CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",1999,10,2,R.drawable.image1));
+        //CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",1991,10,7,R.drawable.image2));
+
         countDownItemAdapter=new CountDownItemAdapter(getContext(),R.layout.list_count_down_item,CdiList);
         listViewCdi.setAdapter(countDownItemAdapter);
-        iamgeViewBackground.setImageResource(CdiList.get(0).getImageId());
+
+        if(CdiList.size()!=0)
+            iamgeViewBackground.setImageResource(CdiList.get(0).getImageId());
 
         listViewCdi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

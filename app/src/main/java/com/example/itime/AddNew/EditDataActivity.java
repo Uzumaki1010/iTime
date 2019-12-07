@@ -1,4 +1,4 @@
-package com.example.itime;
+package com.example.itime.AddNew;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.itime.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class EditDataActivity extends AppCompatActivity {

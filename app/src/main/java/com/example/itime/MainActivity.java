@@ -1,20 +1,17 @@
 package com.example.itime;
 
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.example.itime.AddNew.AddNewActivity;
 import com.example.itime.CDI.CountDownItem;
-import com.example.itime.DB.CdiDb;
-import com.example.itime.DB.DataBaseHelper;
+import com.example.itime.CDI.CountDownItemAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import android.view.ContextMenu;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -31,24 +28,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ADD_NEW = 901;
+
     private AppBarConfiguration mAppBarConfiguration;
 
     private String title,note,repeat,tag;
     private int year,month,day,imageId;
     private static int current_theme=-1;
-    private ArrayList<CountDownItem> CdiList=new ArrayList<>();
-
+    public final ArrayList<CountDownItem> CdiList=new ArrayList<>();
+    private CountDownItemAdapter countDownItemAdapter;
     private FloatingActionButton fabChangeColor,fab;
+
+    public ArrayList<CountDownItem> getCdiList(){
+        return CdiList;
+    }
+    public CountDownItemAdapter getCountDownItemAdapter() {
+        return countDownItemAdapter;
+    }
 
     //新建事件的返回结果
     @Override
@@ -66,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
                     day=data.getIntExtra("day",0);
                     imageId=data.getIntExtra("imageId",0);
 
-                    new CdiDb().insertCdi(title,note,repeat,tag,year,month,day,imageId);
+                    CdiList.add(new CountDownItem(title,note,repeat,tag,year,month,day,imageId));
+                    countDownItemAdapter.notifyDataSetChanged();
                 }
                 break;
         }
@@ -82,13 +87,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        CdiDb.context=this;
 
         fabChangeColor=findViewById(R.id.fab_change_color);
         fab = findViewById(R.id.fab_add_new);
 
-        if(current_theme!=-1)
-        {
+        //CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",1999,10,2,R.drawable.image1));
+        CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",2020,10,7,R.drawable.image2));
+        countDownItemAdapter=new CountDownItemAdapter(MainActivity.this,R.layout.list_count_down_item,CdiList);
+
+        //设置按钮颜色
+        if(current_theme!=-1){
             switch (current_theme){
                 case R.style.AppTheme01:
                     fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorTheme1)));
@@ -124,11 +132,11 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }
-
         //更改主题颜色的点击事件
         fabChangeColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //显示选择对话框
                 showChooseDialog();
             }
         });
@@ -152,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -164,6 +173,21 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
+
+    //以下为更换主题所需代码
     private int mCurrentWhich = 0;
     private int mTempWhich;
     private void showChooseDialog() {
@@ -192,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setNegativeButton("取消", null);
         builder.show();
     }
-
+    //重新启动activity
     private void reload() {
         Intent intent = getIntent();
         overridePendingTransition(0, 0);
@@ -201,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(0, 0);
         startActivity(intent);
     }
-
+    //为current_theme赋值，重新启动activity时可以使用
     private void changeTheme(int mCurrentWhich) {
         switch (mCurrentWhich) {
             case 0:
@@ -231,19 +255,5 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
     }
 }

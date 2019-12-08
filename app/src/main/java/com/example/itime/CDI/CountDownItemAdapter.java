@@ -32,7 +32,7 @@ public class CountDownItemAdapter extends ArrayAdapter<CountDownItem> {
         ((ImageView) view.findViewById(R.id.image_view_cdi_background)).setImageResource(countDownItem.getImageId());
         ((TextView) view.findViewById(R.id.text_view_cdi_title)).setText(countDownItem.getTitle());
         ((TextView)view.findViewById(R.id.text_view_cdi_date)).setText(countDownItem.getYear()+"年"+countDownItem.getMonth()+"月"+countDownItem.getDay()+"日");
-        ((TextView)view.findViewById(R.id.text_view_cdi_note)).setText(countDownItem.getNote());
+        ((TextView)view.findViewById(R.id.text_view_note)).setText(countDownItem.getNote());
         ((TextView)view.findViewById(R.id.text_view_cdi_count_down)).setText("还剩"+'\n'+countDownItem.getRestDays()+"天");
         return view;
     }

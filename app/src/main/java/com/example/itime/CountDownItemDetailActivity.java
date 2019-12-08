@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.itime.CDI.CountDownItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 public class CountDownItemDetailActivity extends AppCompatActivity {
 
@@ -15,6 +18,8 @@ public class CountDownItemDetailActivity extends AppCompatActivity {
     private int position;
     private ImageView imageViewBack;
     private FloatingActionButton floatingActionButtonReturn,floatingActionButtonEdit,floatingActionButtonDelete;
+    private ArrayList<CountDownItem> CdiList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

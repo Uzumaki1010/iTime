@@ -110,7 +110,8 @@
                 android:id="@+id/text_view_show_data"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textSize="24sp"/>
 
             <TextView
                 android:id="@+id/textView13"
@@ -121,7 +122,8 @@
                 android:id="@+id/text_view_show_count_down"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textSize="24sp"/>
 
         </LinearLayout>
 

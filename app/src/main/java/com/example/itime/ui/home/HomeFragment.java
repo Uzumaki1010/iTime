@@ -1,5 +1,6 @@
 package com.example.itime.ui.home;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.itime.CDI.CountDownItem;
@@ -21,6 +23,8 @@ import com.example.itime.MainActivity;
 import com.example.itime.R;
 
 import java.util.ArrayList;
+
+import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment {
 
@@ -49,13 +53,24 @@ public class HomeFragment extends Fragment {
         listViewCdi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getActivity(), CountDownItemDetailActivity.class);
+                Intent intent=new Intent(getContext(),CountDownItemDetailActivity.class);
                 intent.putExtra("position",position);
-                intent.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) CdiList);
-                startActivityForResult(intent, REQUEST_CODE_COUNT_DOWN_ITEM_DETAIL);
+                intent.putExtra("list",CdiList);
+                startActivityForResult(intent,REQUEST_CODE_COUNT_DOWN_ITEM_DETAIL);
             }
         });
-
         return root;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(resultCode) {
+            case RESULT_OK:
+                CdiList.remove(data.getIntExtra("position",0));
+                countDownItemAdapter.notifyDataSetChanged();
+                break;
+
+        }
     }
 }

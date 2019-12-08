@@ -29,7 +29,6 @@ public class AddNewActivity extends AppCompatActivity {
     private int ImageId;
     private int Year,Month,Day;
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -64,6 +63,17 @@ public class AddNewActivity extends AppCompatActivity {
         textViewRepeat=(TextView)findViewById(R.id.text_view_repeat);
         textViewImage=(TextView)findViewById(R.id.text_view_image);
         textViewAddTag=(TextView)findViewById(R.id.text_view_addtag);
+
+        editTextTitle.setText(getIntent().getStringExtra("title"));
+        editTextNote.setText(getIntent().getStringExtra("note"));
+        if(getIntent().getIntExtra("year",0)==0)
+            textViewData.setText("日期");
+        else
+            textViewData.setText(getIntent().getIntExtra("year",0)+"-" +
+                getIntent().getIntExtra("month",0)+"-" +
+                getIntent().getIntExtra("day",0));
+        textViewRepeat.setText(getIntent().getStringExtra("repeat"));
+        textViewAddTag.setText(getIntent().getStringExtra("tag"));
 
         //返回
         floatingActionButtonBack.setOnClickListener(new View.OnClickListener() {

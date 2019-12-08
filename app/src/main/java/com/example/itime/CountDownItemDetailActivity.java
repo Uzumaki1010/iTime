@@ -1,14 +1,18 @@
 package com.example.itime;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.itime.AddNew.AddNewActivity;
 import com.example.itime.CDI.CountDownItem;
+import com.example.itime.ui.home.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.greenrobot.eventbus.EventBus;
@@ -23,6 +27,7 @@ public class CountDownItemDetailActivity extends AppCompatActivity {
     private int position;
     private ImageView imageViewBack;
     private FloatingActionButton floatingActionButtonReturn,floatingActionButtonEdit,floatingActionButtonDelete;
+    private TextView textViewShowTitle,textViewShowCountDown,textViewShowDate;
     private ArrayList<CountDownItem> CdiList;
 
     @Override
@@ -34,12 +39,20 @@ public class CountDownItemDetailActivity extends AppCompatActivity {
         floatingActionButtonReturn=findViewById(R.id.floating_action_button_return);
         floatingActionButtonEdit=findViewById(R.id.floating_action_button_edit);
         floatingActionButtonDelete=findViewById(R.id.floating_action_button_delete);
+        textViewShowTitle=findViewById(R.id.text_view_show_title);
+        textViewShowCountDown=findViewById(R.id.text_view_show_count_down);
+        textViewShowDate=findViewById(R.id.text_view_show_data);
 
         position=getIntent().getIntExtra("position",0);
         CdiList=getIntent().getParcelableArrayListExtra("list");
-        int imageId=CdiList.get(position).getImageId();
-        imageViewBack.setImageResource(imageId);
 
+        //显示倒计时项目的详情
+        imageViewBack.setImageResource(CdiList.get(position).getImageId());
+        textViewShowTitle.setText(CdiList.get(position).getTitle());
+        textViewShowCountDown.setText("还剩"+CdiList.get(position).getRestDays()+"天");
+        textViewShowDate.setText(CdiList.get(position).getYear()+"年"+CdiList.get(position).getMonth()+"月"+CdiList.get(position).getDay()+"日");
+
+        //返回的点击事件
         floatingActionButtonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,10 +60,11 @@ public class CountDownItemDetailActivity extends AppCompatActivity {
             }
         });
 
+        //编辑的点击事件
         floatingActionButtonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(CountDownItemDetailActivity.this,EditCountDownItemActivity.class);
+                Intent intent=new Intent(CountDownItemDetailActivity.this, AddNewActivity.class);
                 intent.putExtra("title",CdiList.get(position).getTitle());
                 intent.putExtra("note",CdiList.get(position).getNote());
                 intent.putExtra("repeat",CdiList.get(position).getRepeat());
@@ -59,15 +73,24 @@ public class CountDownItemDetailActivity extends AppCompatActivity {
                 intent.putExtra("month",CdiList.get(position).getMonth());
                 intent.putExtra("day",CdiList.get(position).getDay());
                 startActivityForResult(intent, REQUEST_CODE_EDIT_COUNT_DOWN_ITEM);
-                CountDownItemDetailActivity.this.finish();
             }
         });
 
+        //删除的点击事件
         floatingActionButtonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.putExtra("position",position);
+                setResult(RESULT_OK,intent);
                 CountDownItemDetailActivity.this.finish();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }

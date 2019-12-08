@@ -12,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".EditCountDownItemActivity"></activity>
         <activity android:name=".CountDownItemDetailActivity" />
         <activity android:name=".AddNew.SelectImageActivity" />
         <activity android:name=".AddNew.EditDataActivity" />

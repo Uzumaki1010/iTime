@@ -38,6 +38,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity{
 
     public static final int REQUEST_CODE_ADD_NEW = 901;
+    public static final int REQUEST_CODE_COUNT_DOWN_ITEM_DETAIL = 904;
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity{
     public final ArrayList<CountDownItem> CdiList=new ArrayList<>();
     private CountDownItemAdapter countDownItemAdapter;
     private FloatingActionButton fabChangeColor,fab;
-    private ListView listViewCdi;
 
     public ArrayList<CountDownItem> getCdiList(){
         return CdiList;
@@ -76,11 +76,16 @@ public class MainActivity extends AppCompatActivity{
                     countDownItemAdapter.notifyDataSetChanged();
                 }
                 break;
-        }
-    }
+                /*
+            case REQUEST_CODE_COUNT_DOWN_ITEM_DETAIL:
+                if(resultCode==RESULT_OK){
+                    CdiList.remove(data.getIntExtra("position",0));
+                    countDownItemAdapter.notifyDataSetChanged();
+                }
+                break;
 
-    public ListView getListViewCdi() {
-        return listViewCdi;
+                 */
+        }
     }
 
     @Override
@@ -96,7 +101,6 @@ public class MainActivity extends AppCompatActivity{
 
         fabChangeColor=findViewById(R.id.fab_change_color);
         fab = findViewById(R.id.fab_add_new);
-        listViewCdi=findViewById(R.id.list_view_count_down_item);
 
         //CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",2020,10,2,R.drawable.image1));
         CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",2020,10,7,R.drawable.image2));
@@ -153,10 +157,10 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(MainActivity.this, AddNewActivity.class);
-                intent.putExtra("title","无");
-                intent.putExtra("note","无");
-                intent.putExtra("repeat","无");
-                intent.putExtra("tag","无");
+                intent.putExtra("title","");
+                intent.putExtra("note","");
+                intent.putExtra("repeat","重复设置");
+                intent.putExtra("tag","添加标签");
                 intent.putExtra("year",0);
                 intent.putExtra("month",0);
                 intent.putExtra("day",0);

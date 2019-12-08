@@ -74,6 +74,7 @@ public class AddNewActivity extends AppCompatActivity {
                 getIntent().getIntExtra("day",0));
         textViewRepeat.setText(getIntent().getStringExtra("repeat"));
         textViewAddTag.setText(getIntent().getStringExtra("tag"));
+        ImageId=getIntent().getIntExtra("imageId",0);
 
         //返回
         floatingActionButtonBack.setOnClickListener(new View.OnClickListener() {

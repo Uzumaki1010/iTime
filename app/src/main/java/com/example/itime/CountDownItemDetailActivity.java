@@ -56,11 +56,22 @@ public class CountDownItemDetailActivity extends AppCompatActivity {
         floatingActionButtonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.putExtra("position",position);
+                intent.putExtra("title",CdiList.get(position).getTitle());
+                intent.putExtra("note",CdiList.get(position).getNote());
+                intent.putExtra("repeat",CdiList.get(position).getRepeat());
+                intent.putExtra("tag",CdiList.get(position).getTag());
+                intent.putExtra("year",CdiList.get(position).getYear());
+                intent.putExtra("month",CdiList.get(position).getMonth());
+                intent.putExtra("day",CdiList.get(position).getDay());
+                intent.putExtra("imageId",CdiList.get(position).getImageId());
+                setResult(RESULT_FIRST_USER,intent);
                 CountDownItemDetailActivity.this.finish();
             }
         });
 
-        //编辑的点击事件
+        //编辑的点击事件,跳转至新建界面
         floatingActionButtonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +102,22 @@ public class CountDownItemDetailActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+            CdiList.get(position).setTitle(data.getStringExtra("title"));
+            CdiList.get(position).setNote(data.getStringExtra("note"));
+            CdiList.get(position).setRepeat(data.getStringExtra("repeat"));
+            CdiList.get(position).setTag(data.getStringExtra("tag"));
+            CdiList.get(position).setYear(data.getIntExtra("year",0));
+            CdiList.get(position).setMonth(data.getIntExtra("month",0));
+            CdiList.get(position).setDay(data.getIntExtra("day",0));
+            CdiList.get(position).setImageId(data.getIntExtra("imageId",0));
 
+            imageViewBack.setImageResource(data.getIntExtra("imageId",0));
+            textViewShowTitle.setText(data.getStringExtra("title"));
+            textViewShowCountDown.setText("还剩"+CdiList.get(position).getRestDays()+"天");
+            textViewShowDate.setText(data.getIntExtra("year",0)+"年"+
+                    data.getIntExtra("month",0)+"月"+
+                    data.getIntExtra("day",0)+"日");
+        }
     }
 }

@@ -24,6 +24,7 @@ import com.example.itime.R;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_FIRST_USER;
 import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment {
@@ -70,7 +71,20 @@ public class HomeFragment extends Fragment {
                 CdiList.remove(data.getIntExtra("position",0));
                 countDownItemAdapter.notifyDataSetChanged();
                 break;
-
+            case RESULT_FIRST_USER:
+                int p=data.getIntExtra("position",0);
+                CdiList.get(p).setTitle(data.getStringExtra("title"));
+                CdiList.get(p).setNote(data.getStringExtra("note"));
+                CdiList.get(p).setRepeat(data.getStringExtra("repeat"));
+                CdiList.get(p).setTag(data.getStringExtra("tag"));
+                CdiList.get(p).setYear(data.getIntExtra("year",0));
+                CdiList.get(p).setMonth(data.getIntExtra("month",0));
+                CdiList.get(p).setDay(data.getIntExtra("day",0));
+                CdiList.get(p).setImageId(data.getIntExtra("imageId",0));
+                if(p==0){
+                    iamgeViewBackground.setImageResource(data.getIntExtra("imageId",0));
+                }
+                countDownItemAdapter.notifyDataSetChanged();
         }
     }
 }

@@ -6,9 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.itime.CDI.CountDownItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -31,7 +36,9 @@ public class CountDownItemDetailActivity extends AppCompatActivity {
         floatingActionButtonDelete=findViewById(R.id.floating_action_button_delete);
 
         position=getIntent().getIntExtra("position",0);
-        imageViewBack.setImageResource(R.drawable.image1);
+        CdiList=getIntent().getParcelableArrayListExtra("list");
+        int imageId=CdiList.get(position).getImageId();
+        imageViewBack.setImageResource(imageId);
 
         floatingActionButtonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,8 +51,15 @@ public class CountDownItemDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(CountDownItemDetailActivity.this,EditCountDownItemActivity.class);
-                intent.putExtra("position",position);
+                intent.putExtra("title",CdiList.get(position).getTitle());
+                intent.putExtra("note",CdiList.get(position).getNote());
+                intent.putExtra("repeat",CdiList.get(position).getRepeat());
+                intent.putExtra("tag",CdiList.get(position).getTag());
+                intent.putExtra("year",CdiList.get(position).getYear());
+                intent.putExtra("month",CdiList.get(position).getMonth());
+                intent.putExtra("day",CdiList.get(position).getDay());
                 startActivityForResult(intent, REQUEST_CODE_EDIT_COUNT_DOWN_ITEM);
+                CountDownItemDetailActivity.this.finish();
             }
         });
 

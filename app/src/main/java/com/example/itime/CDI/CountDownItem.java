@@ -1,13 +1,39 @@
 package com.example.itime.CDI;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Calendar;
 
-public class CountDownItem {
+public class CountDownItem implements Parcelable {
     private String title,note,repeat,tag;
     private int imageId;
     private int year;
     private int month;
     private int day;
+
+    protected CountDownItem(Parcel in) {
+        title = in.readString();
+        note = in.readString();
+        repeat = in.readString();
+        tag = in.readString();
+        year = in.readInt();
+        month = in.readInt();
+        day = in.readInt();
+        imageId = in.readInt();
+    }
+
+    public static final Creator<CountDownItem> CREATOR = new Creator<CountDownItem>() {
+        @Override
+        public CountDownItem createFromParcel(Parcel in) {
+            return new CountDownItem(in);
+        }
+
+        @Override
+        public CountDownItem[] newArray(int size) {
+            return new CountDownItem[size];
+        }
+    };
 
     public String getTitle() {
         return title;
@@ -198,5 +224,22 @@ public class CountDownItem {
             }
         }
         return restDays;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(note);
+        dest.writeString(repeat);
+        dest.writeString(tag);
+        dest.writeInt(year);
+        dest.writeInt(month);
+        dest.writeInt(day);
+        dest.writeInt(imageId);
     }
 }

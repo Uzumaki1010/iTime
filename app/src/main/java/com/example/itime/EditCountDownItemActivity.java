@@ -12,7 +12,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class EditCountDownItemActivity extends AppCompatActivity {
 
-    private int position;
     private EditText editTextTitle,editTextNote;
     private TextView textViewData,textViewRepeat,textViewTag;
     private FloatingActionButton floatingActionButtonBack,floatingActionButtonOk;
@@ -28,13 +27,15 @@ public class EditCountDownItemActivity extends AppCompatActivity {
         textViewTag=findViewById(R.id.text_view_addtag);
         floatingActionButtonBack=findViewById(R.id.floating_action_button_back);
         floatingActionButtonOk=findViewById(R.id.floating_action_button_ok);
-        position=getIntent().getIntExtra("position",0);
+
         //要改
-        editTextTitle.setText("1");
-        editTextNote.setText("2");
-        textViewData.setText("3");
-        textViewRepeat.setText("4");
-        textViewTag.setText("5");
+        editTextTitle.setText(getIntent().getStringExtra("title"));
+        editTextNote.setText(getIntent().getStringExtra("note"));
+        textViewData.setText(getIntent().getIntExtra("year",0)+"-" +
+                getIntent().getIntExtra("month",0)+"-" +
+                getIntent().getIntExtra("day",0));
+        textViewRepeat.setText(getIntent().getStringExtra("repeat"));
+        textViewTag.setText(getIntent().getStringExtra("tag"));
 
         floatingActionButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override

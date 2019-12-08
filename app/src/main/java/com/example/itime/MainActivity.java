@@ -15,6 +15,7 @@ import android.view.ContextMenu;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -34,7 +35,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     public static final int REQUEST_CODE_ADD_NEW = 901;
 
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public final ArrayList<CountDownItem> CdiList=new ArrayList<>();
     private CountDownItemAdapter countDownItemAdapter;
     private FloatingActionButton fabChangeColor,fab;
+    private ListView listViewCdi;
 
     public ArrayList<CountDownItem> getCdiList(){
         return CdiList;
@@ -77,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public ListView getListViewCdi() {
+        return listViewCdi;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //设置主题
@@ -90,8 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
         fabChangeColor=findViewById(R.id.fab_change_color);
         fab = findViewById(R.id.fab_add_new);
+        listViewCdi=findViewById(R.id.list_view_count_down_item);
 
-        //CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",1999,10,2,R.drawable.image1));
+        //CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",2020,10,2,R.drawable.image1));
         CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",2020,10,7,R.drawable.image2));
         countDownItemAdapter=new CountDownItemAdapter(MainActivity.this,R.layout.list_count_down_item,CdiList);
 

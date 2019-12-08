@@ -3,6 +3,7 @@ package com.example.itime.ui.home;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class HomeFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(getActivity(), CountDownItemDetailActivity.class);
                 intent.putExtra("position",position);
+                intent.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) CdiList);
                 startActivityForResult(intent, REQUEST_CODE_COUNT_DOWN_ITEM_DETAIL);
             }
         });

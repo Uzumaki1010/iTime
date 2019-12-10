@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.example.itime.AddNew.AddNewActivity;
 import com.example.itime.CDI.CountDownItem;
 import com.example.itime.CDI.CountDownItemAdapter;
+import com.example.itime.CDI.CountDownItemSaver;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.view.ContextMenu;
@@ -38,16 +39,16 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity{
 
     public static final int REQUEST_CODE_ADD_NEW = 901;
-    public static final int REQUEST_CODE_COUNT_DOWN_ITEM_DETAIL = 904;
 
     private AppBarConfiguration mAppBarConfiguration;
 
     private String title,note,repeat,tag;
     private int year,month,day,imageId;
     private static int current_theme=-1;
-    public final ArrayList<CountDownItem> CdiList=new ArrayList<>();
+    private ArrayList<CountDownItem> CdiList=new ArrayList<>();
     private CountDownItemAdapter countDownItemAdapter;
     private FloatingActionButton fabChangeColor,fab;
+    CountDownItemSaver countDownItemSaver;
 
     public ArrayList<CountDownItem> getCdiList(){
         return CdiList;
@@ -76,16 +77,13 @@ public class MainActivity extends AppCompatActivity{
                     countDownItemAdapter.notifyDataSetChanged();
                 }
                 break;
-                /*
-            case REQUEST_CODE_COUNT_DOWN_ITEM_DETAIL:
-                if(resultCode==RESULT_OK){
-                    CdiList.remove(data.getIntExtra("position",0));
-                    countDownItemAdapter.notifyDataSetChanged();
-                }
-                break;
-
-                 */
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        countDownItemSaver.save();
     }
 
     @Override
@@ -102,8 +100,10 @@ public class MainActivity extends AppCompatActivity{
         fabChangeColor=findViewById(R.id.fab_change_color);
         fab = findViewById(R.id.fab_add_new);
 
-        //CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",2020,10,2,R.drawable.image1));
-        CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",2020,10,7,R.drawable.image2));
+        countDownItemSaver=new CountDownItemSaver(this);
+        CdiList=countDownItemSaver.load();
+        if(CdiList.size()==0)
+            CdiList.add(new CountDownItem("Birthday","Happy Birthday","每年","生日",2020,10,7,R.drawable.image2));
         countDownItemAdapter=new CountDownItemAdapter(MainActivity.this,R.layout.list_count_down_item,CdiList);
 
         //设置按钮颜色

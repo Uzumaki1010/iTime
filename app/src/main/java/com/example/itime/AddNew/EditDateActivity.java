@@ -10,7 +10,7 @@ import android.widget.EditText;
 import com.example.itime.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class EditDataActivity extends AppCompatActivity {
+public class EditDateActivity extends AppCompatActivity {
 
     private FloatingActionButton floatingActionButtonCancel,floatingActionButtonConfirm;
     private EditText editTextYear,editTextMonth,editTextData;
@@ -30,7 +30,7 @@ public class EditDataActivity extends AppCompatActivity {
         floatingActionButtonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditDataActivity.this.finish();
+                EditDateActivity.this.finish();
             }
         });
 
@@ -43,7 +43,7 @@ public class EditDataActivity extends AppCompatActivity {
                 intent1.putExtra("month",Integer.valueOf(editTextMonth.getText().toString()).intValue());
                 intent1.putExtra("day",Integer.valueOf(editTextData.getText().toString()).intValue());
                 setResult(RESULT_OK,intent1);
-                EditDataActivity.this.finish();
+                EditDateActivity.this.finish();
             }
         });
     }

@@ -106,7 +106,7 @@ public class AddNewActivity extends AppCompatActivity {
         textViewData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1= new Intent(AddNewActivity.this,EditDataActivity.class);
+                Intent intent1= new Intent(AddNewActivity.this, EditDateActivity.class);
                 intent1.putExtra("year",1);
                 intent1.putExtra("month",1);
                 intent1.putExtra("day",1);

@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".CountDownItemDetailActivity" />
         <activity android:name=".AddNew.SelectImageActivity" />
-        <activity android:name=".AddNew.EditDataActivity" />
+        <activity android:name=".AddNew.EditDateActivity" />
         <activity android:name=".AddNew.AddNewActivity" />
         <activity
             android:name=".MainActivity"

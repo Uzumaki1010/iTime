@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
     public static final int REQUEST_CODE_COUNT_DOWN_ITEM_DETAIL = 904;
     private CountDownItemAdapter countDownItemAdapter;
     private ListView listViewCdi;
-    private ImageView iamgeViewBackground;
+    private ImageView imageViewBackground;
     private ArrayList<CountDownItem> CdiList;
 
     @Override
@@ -46,9 +46,9 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         listViewCdi=root.findViewById(R.id.list_view_count_down_item);
-        iamgeViewBackground=root.findViewById(R.id.image_view_back_ground);
+        imageViewBackground=root.findViewById(R.id.image_view_back_ground);
         if(CdiList.size()!=0)
-            iamgeViewBackground.setImageResource(CdiList.get(0).getImageId());
+            imageViewBackground.setImageResource(CdiList.get(0).getImageId());
         listViewCdi.setAdapter(countDownItemAdapter);
 
         listViewCdi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,6 +68,9 @@ public class HomeFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         switch(resultCode) {
             case RESULT_OK:
+                if(data.getIntExtra("position",0)==0) {
+                     imageViewBackground.setImageResource(CdiList.get(1).getImageId());
+                }
                 CdiList.remove(data.getIntExtra("position",0));
                 countDownItemAdapter.notifyDataSetChanged();
                 break;
@@ -82,7 +85,7 @@ public class HomeFragment extends Fragment {
                 CdiList.get(p).setDay(data.getIntExtra("day",0));
                 CdiList.get(p).setImageId(data.getIntExtra("imageId",0));
                 if(p==0){
-                    iamgeViewBackground.setImageResource(data.getIntExtra("imageId",0));
+                    imageViewBackground.setImageResource(data.getIntExtra("imageId",0));
                 }
                 countDownItemAdapter.notifyDataSetChanged();
         }
